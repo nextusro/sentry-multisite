@@ -1,32 +1,12 @@
 {
-	"name": "cartalyst/sentry",
+	"name": "woazala/sentry-multisite",
 	"description": "PHP 5.3+ Fully-featured Authentication & Authorization System",
-	"keywords": ["auth", "security", "laravel", "codeigniter", "fuelphp", "kohana"],
+	"keywords": ["auth", "security", "laravel", "multisite"],
 	"license": "BSD-3-Clause",
 	"authors": [
 		{
-			"name": "Cartalyst LLC",
-			"email": "help@cartalyst.com"
-		},
-		{
-			"name": "Dan Syme",
-			"email": "dan.syme@cartalyst.com",
-			"role": "Creator & Designer"
-		},
-		{
-			"name": "Ben Corlett",
-			"email": "ben.corlett@cartalyst.com",
-			"role": "Developer"
-		},
-		{
-			"name": "Daniel Petrie",
-			"email": "dan.petrie@cartalyst.com",
-			"role": "Developer"
-		},
-		{
-			"name": "Bruno Gaspar",
-			"email": "bruno.gaspar@cartalyst.com",
-			"role": "Developer"
+			"name": "Madalin Zala",
+			"email": "madalinzala@gmail.com"
 		}
 	],
 	"require": {
@@ -59,9 +39,8 @@
 	},
 	"extra": {
 		"component": "package",
-		"frameworks": ["Laravel 3", "Laravel 4", "CodeIgniter 3", "FuelPHP 1", "Kohana"],
+		"frameworks": ["Laravel 4"],
 		"versions": {
-			"1": "1.1/master",
 			"2": "master"
 		},
 		"branch-alias": {
