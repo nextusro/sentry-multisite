@@ -21,8 +21,9 @@
 use Cartalyst\Sentry\Groups\GroupInterface;
 use Cartalyst\Sentry\Groups\GroupNotFoundException;
 use Cartalyst\Sentry\Groups\ProviderInterface;
+use Cartalyst\Sentry\Multisite\MultisiteProvider;
 
-class Provider implements ProviderInterface {
+class Provider extends MultisiteProvider implements ProviderInterface {
 
 	/**
 	 * The Eloquent group model.
@@ -56,7 +57,7 @@ class Provider implements ProviderInterface {
 	{
 		$model = $this->createModel();
 
-		if ( ! $group = $model->newQuery()->find($id))
+		if ( ! $group = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->find($id))
 		{
 			throw new GroupNotFoundException("A group could not be found with ID [$id].");
 		}
@@ -75,7 +76,7 @@ class Provider implements ProviderInterface {
 	{
 		$model = $this->createModel();
 
-		if ( ! $group = $model->newQuery()->where('name', '=', $name)->first())
+		if ( ! $group = $model->newQuery()->where('name', '=', $name)->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->first())
 		{
 			throw new GroupNotFoundException("A group could not be found with the name [$name].");
 		}
@@ -92,7 +93,7 @@ class Provider implements ProviderInterface {
 	{
 		$model = $this->createModel();
 
-		return $model->newQuery()->get()->all();
+		return $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->get()->all();
 	}
 
 	/**

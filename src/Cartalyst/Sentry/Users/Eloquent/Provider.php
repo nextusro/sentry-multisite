@@ -25,8 +25,9 @@ use Cartalyst\Sentry\Users\UserInterface;
 use Cartalyst\Sentry\Users\UserNotActivatedException;
 use Cartalyst\Sentry\Users\UserNotFoundException;
 use Cartalyst\Sentry\Users\WrongPasswordException;
+use Cartalyst\Sentry\Multisite\MultisiteProvider;
 
-class Provider implements ProviderInterface {
+class Provider extends MultisiteProvider implements ProviderInterface {
 
 	/**
 	 * The Eloquent user model.
@@ -72,7 +73,7 @@ class Provider implements ProviderInterface {
 	{
 		$model = $this->createModel();
 
-		if ( ! $user = $model->newQuery()->find($id))
+		if ( ! $user = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->find($id))
 		{
 			throw new UserNotFoundException("A user could not be found with ID [$id].");
 		}
@@ -91,7 +92,7 @@ class Provider implements ProviderInterface {
 	{
 		$model = $this->createModel();
 
-		if ( ! $user = $model->newQuery()->where($model->getLoginName(), '=', $login)->first())
+		if ( ! $user = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->where($model->getLoginName(), '=', $login)->first())
 		{
 			throw new UserNotFoundException("A user could not be found with a login value of [$login].");
 		}
@@ -118,7 +119,7 @@ class Provider implements ProviderInterface {
 
 		$passwordName = $model->getPasswordName();
 
-		$query              = $model->newQuery();
+		$query              = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey());
 		$hashableAttributes = $model->getHashableAttributes();
 		$hashedCredentials  = array();
 
@@ -158,7 +159,7 @@ class Provider implements ProviderInterface {
 			}
 			else if ($credential == $passwordName)
 			{
-				if (method_exists($this->hasher, 'needsRehashed') && 
+				if (method_exists($this->hasher, 'needsRehashed') &&
 					$this->hasher->needsRehashed($user->{$credential}))
 				{
 					// The algorithm used to create the hash is outdated and insecure.
@@ -190,7 +191,8 @@ class Provider implements ProviderInterface {
 
 		$model = $this->createModel();
 
-		$result = $model->newQuery()->where('activation_code', '=', $code)->get();
+		$result = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())
+			->where('activation_code', '=', $code)->get();
 
 		if (($count = $result->count()) > 1)
 		{
@@ -217,7 +219,7 @@ class Provider implements ProviderInterface {
 	{
 		$model = $this->createModel();
 
-		$result = $model->newQuery()->where('reset_password_code', '=', $code)->get();
+		$result = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->where('reset_password_code', '=', $code)->get();
 
 		if (($count = $result->count()) > 1)
 		{
@@ -239,7 +241,7 @@ class Provider implements ProviderInterface {
 	 */
 	public function findAll()
 	{
-		return $this->createModel()->newQuery()->get()->all();
+		return $this->createModel()->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->get()->all();
 	}
 
 	/**
@@ -251,7 +253,7 @@ class Provider implements ProviderInterface {
 	 */
 	public function findAllInGroup(GroupInterface $group)
 	{
-		return $group->users()->get();
+		return $group->users()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->get();
 	}
 
 	/**

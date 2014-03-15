@@ -22,8 +22,9 @@ use Cartalyst\Sentry\Throttling\ThrottleInterface;
 use Cartalyst\Sentry\Throttling\ProviderInterface;
 use Cartalyst\Sentry\Users\ProviderInterface as UserProviderInterface;
 use Cartalyst\Sentry\Users\UserInterface;
+use Cartalyst\Sentry\Multisite\MultisiteProvider;
 
-class Provider implements ProviderInterface {
+class Provider extends MultisiteProvider implements ProviderInterface {
 
 	/**
 	 * The Eloquent throttle model.
@@ -74,7 +75,7 @@ class Provider implements ProviderInterface {
 	public function findByUser(UserInterface $user, $ipAddress = null)
 	{
 		$model = $this->createModel();
-		$query = $model->where('user_id', '=', ($userId = $user->getId()));
+		$query = $model->where('user_id', '=', ($userId = $user->getId()))->where($this->getMultisiteKey(), '=', $this->getMultisiteKey());
 
 		if ($ipAddress)
 		{

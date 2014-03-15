@@ -72,6 +72,33 @@ return array(
 
 		'key' => 'cartalyst_sentry',
 
+ 	)
+
+	/*
+	|--------------------------------------------------------------------------
+	| Multisite
+	|--------------------------------------------------------------------------
+	|
+	| Configuration specific to the multisite component of Sentry.
+	|
+	*/
+
+	'multisite' => array(
+
+		/*
+		|--------------------------------------------------------------------------
+		| Default Multisite Key
+		|--------------------------------------------------------------------------
+		|
+		| This option allows you to specify the default multisite key used by Sentry.
+		|
+		| Supported: string
+		|
+		*/
+
+		'key' => 'app_id',
+		'value' => 1,
+
  	),
 
 	/*

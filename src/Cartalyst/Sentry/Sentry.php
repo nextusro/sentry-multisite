@@ -35,7 +35,7 @@ use Cartalyst\Sentry\Users\UserInterface;
 use Cartalyst\Sentry\Users\UserNotFoundException;
 use Cartalyst\Sentry\Users\UserNotActivatedException;
 
-class Sentry {
+class Sentry extends MultisiteProvider {
 
 	/**
 	 * The user that's been retrieved and is used

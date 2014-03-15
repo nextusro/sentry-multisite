@@ -26,9 +26,11 @@ use Cartalyst\Sentry\Users\PasswordRequiredException;
 use Cartalyst\Sentry\Users\UserAlreadyActivatedException;
 use Cartalyst\Sentry\Users\UserExistsException;
 use Cartalyst\Sentry\Users\UserInterface;
+use Cartalyst\Sentry\Multisite\Multisite;
 use DateTime;
 
-class User extends Model implements UserInterface {
+
+class User extends Multisite implements UserInterface {
 
 	/**
 	 * The table associated with the model.
@@ -295,7 +297,8 @@ class User extends Model implements UserInterface {
 
 		// Check if the user already exists
 		$query = $this->newQuery();
-		$persistedUser = $query->where($this->getLoginName(), '=', $login)->first();
+		$persistedUser = $query->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())
+			->where($this->getLoginName(), '=', $login)->first();
 
 		if ($persistedUser and $persistedUser->getId() != $this->getId())
 		{

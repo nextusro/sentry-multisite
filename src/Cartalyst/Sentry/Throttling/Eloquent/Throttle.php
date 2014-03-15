@@ -21,10 +21,10 @@
 use Cartalyst\Sentry\Throttling\ThrottleInterface;
 use Cartalyst\Sentry\Throttling\UserSuspendedException;
 use Cartalyst\Sentry\Throttling\UserBannedException;
-use Illuminate\Database\Eloquent\Model;
+use Cartalyst\Sentry\Multisite\Multisite;
 use DateTime;
 
-class Throttle extends Model implements ThrottleInterface {
+class Throttle extends Multisite implements ThrottleInterface {
 
 	/**
 	 * Throttling status.
