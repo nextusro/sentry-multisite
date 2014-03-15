@@ -42,7 +42,7 @@
 			"2": "master"
 		},
 		"branch-alias": {
-			"dev-master": "2.1.99"
+			"dev-master": "2.1.993"
 		}
 	},
 	"minimum-stability": "dev"
