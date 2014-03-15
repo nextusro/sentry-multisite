@@ -33,7 +33,9 @@
 			"src/Cartalyst/Sentry/Users/Exceptions.php",
 			"src/migrations"
 		],
-		"psr-4": {"Cartalyst\\": "src/Cartalyst"}
+		"psr-0": {
+			"Cartalyst\\Sentry": "src/"
+		}
 	},
 	"extra": {
 		"component": "package",
@@ -42,7 +44,7 @@
 			"2": "master"
 		},
 		"branch-alias": {
-			"dev-master": "2.1.*"
+			"dev-master": "2.1.99"
 		}
 	},
 	"minimum-stability": "dev"
