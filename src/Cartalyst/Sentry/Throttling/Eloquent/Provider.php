@@ -90,6 +90,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 		{
 			$throttle = $this->createModel();
 			$throttle->user_id = $userId;
+			$throttle->{$this->getMultisiteKey()} = $this->getMultisiteValue();
 			if ($ipAddress) $throttle->ip_address = $ipAddress;
 			$throttle->save();
 		}

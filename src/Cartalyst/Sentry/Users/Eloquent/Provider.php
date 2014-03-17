@@ -301,6 +301,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 	{
 		$user = $this->createModel();
 		$user->fill($credentials);
+		$user->{$this->getMultisiteKey()} = $this->getMultisiteValue();
 		$user->save();
 
 		return $user;

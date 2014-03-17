@@ -114,6 +114,7 @@ class Provider implements ProviderInterface {
 
 		$group = $this->createModel();
 		$group->values($attributes, array('name', 'permissions'));
+		$group->{$this->getMultisiteKey()} = $this->getMultisiteValue();
 		$group->save();
 
 		return $group;
