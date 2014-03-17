@@ -33,7 +33,9 @@
 			"src/Cartalyst/Sentry/Users/Exceptions.php",
 			"src/migrations"
 		],
-		"psr-4": {"Cartalyst\\": "src/Cartalyst"}
+		"psr-0": {
+			"Cartalyst\\Sentry": "src/"
+		}
 	},
 	"extra": {
 		"component": "package",
