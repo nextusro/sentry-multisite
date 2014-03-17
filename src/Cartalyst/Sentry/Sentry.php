@@ -34,6 +34,7 @@ use Cartalyst\Sentry\Users\ProviderInterface as UserProviderInterface;
 use Cartalyst\Sentry\Users\UserInterface;
 use Cartalyst\Sentry\Users\UserNotFoundException;
 use Cartalyst\Sentry\Users\UserNotActivatedException;
+use Cartalyst\Sentry\Multisite\MultisiteProvider;
 
 class Sentry extends MultisiteProvider {
 
