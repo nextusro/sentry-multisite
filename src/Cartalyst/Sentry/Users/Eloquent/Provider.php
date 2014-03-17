@@ -73,7 +73,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 	{
 		$model = $this->createModel();
 
-		if ( ! $user = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->find($id))
+		if ( ! $user = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteValue())->find($id))
 		{
 			throw new UserNotFoundException("A user could not be found with ID [$id].");
 		}
@@ -94,7 +94,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 		if($multisite) {
 			$user = $model->newQuery()->where($multisite['key'], '=', $multisite['value'])->where($model->getLoginName(), '=', $login)->first();
 		} else {
-			$user = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->where($model->getLoginName(), '=', $login)->first();
+			$user = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteValue())->where($model->getLoginName(), '=', $login)->first();
 		}
 		if ( ! $user)
 		{
@@ -123,7 +123,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 
 		$passwordName = $model->getPasswordName();
 
-		$query              = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey());
+		$query              = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteValue());
 		$hashableAttributes = $model->getHashableAttributes();
 		$hashedCredentials  = array();
 
@@ -195,7 +195,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 
 		$model = $this->createModel();
 
-		$result = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())
+		$result = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteValue())
 			->where('activation_code', '=', $code)->get();
 
 		if (($count = $result->count()) > 1)
@@ -223,7 +223,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 	{
 		$model = $this->createModel();
 
-		$result = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->where('reset_password_code', '=', $code)->get();
+		$result = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteValue())->where('reset_password_code', '=', $code)->get();
 
 		if (($count = $result->count()) > 1)
 		{
@@ -245,7 +245,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 	 */
 	public function findAll()
 	{
-		return $this->createModel()->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->get()->all();
+		return $this->createModel()->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteValue())->get()->all();
 	}
 
 	/**
@@ -257,7 +257,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 	 */
 	public function findAllInGroup(GroupInterface $group)
 	{
-		return $group->users()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->get();
+		return $group->users()->where($this->getMultisiteKey(), '=', $this->getMultisiteValue())->get();
 	}
 
 	/**

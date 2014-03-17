@@ -75,7 +75,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 	public function findByUser(UserInterface $user, $ipAddress = null)
 	{
 		$model = $this->createModel();
-		$query = $model->where('user_id', '=', ($userId = $user->getId()))->where($this->getMultisiteKey(), '=', $this->getMultisiteKey());
+		$query = $model->where('user_id', '=', ($userId = $user->getId()))->where($this->getMultisiteKey(), '=', $this->getMultisiteValue());
 
 		if ($ipAddress)
 		{

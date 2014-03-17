@@ -57,7 +57,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 	{
 		$model = $this->createModel();
 
-		if ( ! $group = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->find($id))
+		if ( ! $group = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteValue())->find($id))
 		{
 			throw new GroupNotFoundException("A group could not be found with ID [$id].");
 		}
@@ -79,7 +79,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 		if($multisite) {
 			$group = $model->newQuery()->where('name', '=', $name)->where($multisite['key'], '=', $multisite['value'])->first();
 		} else {
-			$group = $model->newQuery()->where('name', '=', $name)->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->first();
+			$group = $model->newQuery()->where('name', '=', $name)->where($this->getMultisiteKey(), '=', $this->getMultisiteValue())->first();
 		}
 
 		if ( ! $group)
@@ -99,7 +99,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 	{
 		$model = $this->createModel();
 
-		return $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->get()->all();
+		return $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteValue())->get()->all();
 	}
 
 	/**

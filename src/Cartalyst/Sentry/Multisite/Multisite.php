@@ -27,14 +27,14 @@ class Multisite extends Model implements MultisiteInterface {
      *
      * @var string
      */
-    protected $mskey = 'app_id';
+    protected $mskey;
 
     /**
      * The value used in the Multisite.
      *
      * @var string
      */
-    protected $msvalue = 1;
+    protected $msvalue;
 
     /**
      * Creates a new Illuminate based Multisite for Sentry.

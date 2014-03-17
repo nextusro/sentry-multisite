@@ -379,7 +379,7 @@ class Group extends Multisite implements GroupInterface {
         // Check if group already exists
         $query = $this->newQuery();
         $persistedGroup = $query->where('name', '=', $name)
-                ->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->first();
+                ->where($this->getMultisiteKey(), '=', $this->getMultisiteValue())->first();
 
         if ($persistedGroup and $persistedGroup->getId() != $this->getId())
         {

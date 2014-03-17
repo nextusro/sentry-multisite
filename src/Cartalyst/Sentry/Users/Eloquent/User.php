@@ -297,7 +297,7 @@ class User extends Multisite implements UserInterface {
 
 		// Check if the user already exists
 		$query = $this->newQuery();
-		$persistedUser = $query->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())
+		$persistedUser = $query->where($this->getMultisiteKey(), '=', $this->getMultisiteValue())
 			->where($this->getLoginName(), '=', $login)->first();
 
 		if ($persistedUser and $persistedUser->getId() != $this->getId())
