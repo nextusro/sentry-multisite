@@ -45,7 +45,7 @@
 			"2": "master"
 		},
 		"branch-alias": {
-			"dev-master": "2.1.993"
+			"dev-master": "2.1.994"
 		}
 	},
 	"minimum-stability": "dev"
