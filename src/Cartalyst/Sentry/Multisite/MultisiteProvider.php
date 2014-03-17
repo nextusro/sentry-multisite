@@ -45,8 +45,8 @@ class MultisiteProvider implements MultisiteProviderInterface {
     public function __construct()
     {
         parent::__construct();
-        $this->mskey = Config::get('cartalyst/sentry::multisite.key');
-        $this->msvalue = Config::get('cartalyst/sentry::multisite.value');
+        $this->mskey = Config::get('woazala/sentry-multisite::multisite.key');
+        $this->msvalue = Config::get('woazala/sentry-multisite::multisite.value');
     }
 
     /**
