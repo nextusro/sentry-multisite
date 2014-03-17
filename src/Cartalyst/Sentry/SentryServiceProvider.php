@@ -39,7 +39,7 @@ class SentryServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('cartalyst/sentry', 'cartalyst/sentry');
+		$this->package('woazala/sentry-multisite', 'woazala/sentry-multisite');
 	}
 
 	/**
@@ -67,7 +67,7 @@ class SentryServiceProvider extends ServiceProvider {
 	{
 		$this->app['sentry.hasher'] = $this->app->share(function($app)
 		{
-			$hasher = $app['config']['cartalyst/sentry::hasher'];
+			$hasher = $app['config']['woazala/sentry-multisite::hasher'];
 
 			switch ($hasher)
 			{
@@ -101,7 +101,7 @@ class SentryServiceProvider extends ServiceProvider {
 	{
 		$this->app['sentry.user'] = $this->app->share(function($app)
 		{
-			$model = $app['config']['cartalyst/sentry::users.model'];
+			$model = $app['config']['woazala/sentry-multisite::users.model'];
 
 			// We will never be accessing a user in Sentry without accessing
 			// the user provider first. So, we can lazily set up our user
@@ -110,7 +110,7 @@ class SentryServiceProvider extends ServiceProvider {
 			// overriding at runtime.
 			if (method_exists($model, 'setLoginAttributeName'))
 			{
-				$loginAttribute = $app['config']['cartalyst/sentry::users.login_attribute'];
+				$loginAttribute = $app['config']['woazala/sentry-multisite::users.login_attribute'];
 
 				forward_static_call_array(
 					array($model, 'setLoginAttributeName'),
@@ -121,7 +121,7 @@ class SentryServiceProvider extends ServiceProvider {
 			// Define the Group model to use for relationships.
 			if (method_exists($model, 'setGroupModel'))
 			{
-				$groupModel = $app['config']['cartalyst/sentry::groups.model'];
+				$groupModel = $app['config']['woazala/sentry-multisite::groups.model'];
 
 				forward_static_call_array(
 					array($model, 'setGroupModel'),
@@ -132,7 +132,7 @@ class SentryServiceProvider extends ServiceProvider {
 			// Define the user group pivot table name to use for relationships.
 			if (method_exists($model, 'setUserGroupsPivot'))
 			{
-				$pivotTable = $app['config']['cartalyst/sentry::user_groups_pivot_table'];
+				$pivotTable = $app['config']['woazala/sentry-multisite::user_groups_pivot_table'];
 
 				forward_static_call_array(
 					array($model, 'setUserGroupsPivot'),
@@ -153,12 +153,12 @@ class SentryServiceProvider extends ServiceProvider {
 	{
 		$this->app['sentry.group'] = $this->app->share(function($app)
 		{
-			$model = $app['config']['cartalyst/sentry::groups.model'];
+			$model = $app['config']['woazala/sentry-multisite::groups.model'];
 
 			// Define the User model to use for relationships.
 			if (method_exists($model, 'setUserModel'))
 			{
-				$userModel = $app['config']['cartalyst/sentry::users.model'];
+				$userModel = $app['config']['woazala/sentry-multisite::users.model'];
 
 				forward_static_call_array(
 					array($model, 'setUserModel'),
@@ -169,7 +169,7 @@ class SentryServiceProvider extends ServiceProvider {
 			// Define the user group pivot table name to use for relationships.
 			if (method_exists($model, 'setUserGroupsPivot'))
 			{
-				$pivotTable = $app['config']['cartalyst/sentry::user_groups_pivot_table'];
+				$pivotTable = $app['config']['woazala/sentry-multisite::user_groups_pivot_table'];
 
 				forward_static_call_array(
 					array($model, 'setUserGroupsPivot'),
@@ -190,18 +190,18 @@ class SentryServiceProvider extends ServiceProvider {
 	{
 		$this->app['sentry.throttle'] = $this->app->share(function($app)
 		{
-			$model = $app['config']['cartalyst/sentry::throttling.model'];
+			$model = $app['config']['woazala/sentry-multisite::throttling.model'];
 
 			$throttleProvider = new ThrottleProvider($app['sentry.user'], $model);
 
-			if ($app['config']['cartalyst/sentry::throttling.enabled'] === false)
+			if ($app['config']['woazala/sentry-multisite::throttling.enabled'] === false)
 			{
 				$throttleProvider->disable();
 			}
 
 			if (method_exists($model, 'setAttemptLimit'))
 			{
-				$attemptLimit = $app['config']['cartalyst/sentry::throttling.attempt_limit'];
+				$attemptLimit = $app['config']['woazala/sentry-multisite::throttling.attempt_limit'];
 
 				forward_static_call_array(
 					array($model, 'setAttemptLimit'),
@@ -210,7 +210,7 @@ class SentryServiceProvider extends ServiceProvider {
 			}
 			if (method_exists($model, 'setSuspensionTime'))
 			{
-				$suspensionTime = $app['config']['cartalyst/sentry::throttling.suspension_time'];
+				$suspensionTime = $app['config']['woazala/sentry-multisite::throttling.suspension_time'];
 
 				forward_static_call_array(
 					array($model, 'setSuspensionTime'),
@@ -231,7 +231,7 @@ class SentryServiceProvider extends ServiceProvider {
 	{
 		$this->app['sentry.session'] = $this->app->share(function($app)
 		{
-			$key = $app['config']['cartalyst/sentry::cookie.key'];
+			$key = $app['config']['woazala/sentry-multisite::cookie.key'];
 
 			return new IlluminateSession($app['session.store'], $key);
 		});
@@ -246,7 +246,7 @@ class SentryServiceProvider extends ServiceProvider {
 	{
 		$this->app['sentry.cookie'] = $this->app->share(function($app)
 		{
-			$key = $app['config']['cartalyst/sentry::cookie.key'];
+			$key = $app['config']['woazala/sentry-multisite::cookie.key'];
 
 			/**
 			 * We'll default to using the 'request' strategy, but switch to

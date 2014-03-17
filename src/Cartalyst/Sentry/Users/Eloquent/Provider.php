@@ -52,6 +52,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 	 */
 	public function __construct(HasherInterface $hasher, $model = null)
 	{
+		parent::__construct();
 		$this->hasher = $hasher;
 
 		if (isset($model))

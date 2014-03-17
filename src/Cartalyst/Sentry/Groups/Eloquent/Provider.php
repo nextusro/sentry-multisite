@@ -40,6 +40,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 	 */
 	public function __construct($model = null)
 	{
+		parent::__construct();
 		if (isset($model))
 		{
 			$this->model = $model;
