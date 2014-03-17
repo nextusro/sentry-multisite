@@ -88,11 +88,15 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 	 * @return \Cartalyst\Sentry\Users\UserInterface
 	 * @throws \Cartalyst\Sentry\Users\UserNotFoundException
 	 */
-	public function findByLogin($login)
+	public function findByLogin($login, $multisite = null)
 	{
 		$model = $this->createModel();
-
-		if ( ! $user = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->where($model->getLoginName(), '=', $login)->first())
+		if($multisite) {
+			$user = $model->newQuery()->where($multisite['key'], '=', $multisite['value'])->where($model->getLoginName(), '=', $login)->first();
+		} else {
+			$user = $model->newQuery()->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->where($model->getLoginName(), '=', $login)->first();
+		}
+		if ( ! $user)
 		{
 			throw new UserNotFoundException("A user could not be found with a login value of [$login].");
 		}

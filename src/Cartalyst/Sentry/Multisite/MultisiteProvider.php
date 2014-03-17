@@ -18,6 +18,7 @@
  * @ink       http://cartalyst.com
  */
 
+use Illuminate\Support\Facades\Config;
 
 class MultisiteProvider implements MultisiteProviderInterface {
 

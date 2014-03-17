@@ -72,11 +72,17 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 	 * @return \Cartalyst\Sentry\Groups\GroupInterface  $group
 	 * @throws \Cartalyst\Sentry\Groups\GroupNotFoundException
 	 */
-	public function findByName($name)
+	public function findByName($name, $multisite = null)
 	{
 		$model = $this->createModel();
 
-		if ( ! $group = $model->newQuery()->where('name', '=', $name)->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->first())
+		if($multisite) {
+			$group = $model->newQuery()->where('name', '=', $name)->where($multisite['key'], '=', $multisite['value'])->first();
+		} else {
+			$group = $model->newQuery()->where('name', '=', $name)->where($this->getMultisiteKey(), '=', $this->getMultisiteKey())->first();
+		}
+
+		if ( ! $group)
 		{
 			throw new GroupNotFoundException("A group could not be found with the name [$name].");
 		}

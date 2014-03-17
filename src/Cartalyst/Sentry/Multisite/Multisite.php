@@ -17,7 +17,8 @@
  * @copyright  (c) 2011 - 2013, cartalyst llc
  * @ink       http://cartalyst.com
  */
-
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Config;
 
 class Multisite extends Model implements MultisiteInterface {
 

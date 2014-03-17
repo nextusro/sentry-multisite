@@ -19,6 +19,7 @@
 		"illuminate/database": ">=4.0.9,<4.2",
 		"illuminate/http": ">=4.0.9,<4.2",
 		"illuminate/session": ">=4.0.9,<4.2",
+		"illuminate/config" : ">=4.0.9,<4.2",
 		"ircmaxell/password-compat": "1.0.*"
 	},
 	"suggest": {
