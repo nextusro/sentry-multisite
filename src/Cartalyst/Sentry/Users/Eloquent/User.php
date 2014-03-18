@@ -317,7 +317,7 @@ class User extends Multisite implements UserInterface {
 	public function save(array $options = array())
 	{
 		$this->validate();
-		$options[$this->getMultisiteKey()] = $this->getMultisiteValue();
+		$options[$this->getMultisiteKey()]  = isset($options[$this->getMultisiteKey()]) ? $options[$this->getMultisiteKey()]  : $this->getMultisiteValue();
 		return parent::save($options);
 	}
 

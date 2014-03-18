@@ -112,7 +112,7 @@ class Throttle extends Multisite implements ThrottleInterface {
 	{
 		$this->attempts++;
 		$this->last_attempt_at = $this->freshTimeStamp();
-		$this->{$this->getMultisiteKey()} = $this->getMultisiteValue();
+		$this->{$this->getMultisiteKey()} = isset($this->{$this->getMultisiteKey()}) ? $this->{$this->getMultisiteKey()} : $this->getMultisiteValue();
 
 		if ($this->getLoginAttempts() >= static::$attemptLimit)
 		{
@@ -146,7 +146,7 @@ class Throttle extends Multisite implements ThrottleInterface {
 		$this->last_attempt_at = null;
 		$this->suspended       = false;
 		$this->suspended_at    = null;
-		$this->{$this->getMultisiteKey()} = $this->getMultisiteValue();
+		$this->{$this->getMultisiteKey()} = isset($this->{$this->getMultisiteKey()}) ? $this->{$this->getMultisiteKey()} : $this->getMultisiteValue();
 		$this->save();
 	}
 
@@ -160,7 +160,7 @@ class Throttle extends Multisite implements ThrottleInterface {
 		if ( ! $this->suspended)
 		{
 			$this->suspended    = true;
-			$this->{$this->getMultisiteKey()} = $this->getMultisiteValue();
+			$this->{$this->getMultisiteKey()} = isset($this->{$this->getMultisiteKey()}) ? $this->{$this->getMultisiteKey()} : $this->getMultisiteValue();
 			$this->suspended_at = $this->freshTimeStamp();
 			$this->save();
 		}
@@ -179,7 +179,7 @@ class Throttle extends Multisite implements ThrottleInterface {
 			$this->last_attempt_at = null;
 			$this->suspended       = false;
 			$this->suspended_at    = null;
-			$this->{$this->getMultisiteKey()} = $this->getMultisiteValue();
+			$this->{$this->getMultisiteKey()} = isset($this->{$this->getMultisiteKey()}) ? $this->{$this->getMultisiteKey()} : $this->getMultisiteValue();
 			$this->save();
 		}
 	}
@@ -211,7 +211,7 @@ class Throttle extends Multisite implements ThrottleInterface {
 		{
 			$this->banned = true;
 			$this->banned_at = $this->freshTimeStamp();
-			$this->{$this->getMultisiteKey()} = $this->getMultisiteValue();
+			$this->{$this->getMultisiteKey()} = isset($this->{$this->getMultisiteKey()}) ? $this->{$this->getMultisiteKey()} : $this->getMultisiteValue();
 			$this->save();
 		}
 	}
@@ -227,7 +227,7 @@ class Throttle extends Multisite implements ThrottleInterface {
 		{
 			$this->banned = false;
 			$this->banned_at = null;
-			$this->{$this->getMultisiteKey()} = $this->getMultisiteValue();
+			$this->{$this->getMultisiteKey()} = isset($this->{$this->getMultisiteKey()}) ? $this->{$this->getMultisiteKey()} : $this->getMultisiteValue();
 			$this->save();
 		}
 	}
@@ -299,7 +299,7 @@ class Throttle extends Multisite implements ThrottleInterface {
 		if ($clearAttemptsAt <= $now)
 		{
 			$this->attempts = 0;
-			$this->{$this->getMultisiteKey()} = $this->getMultisiteValue();
+			$this->{$this->getMultisiteKey()} = isset($this->{$this->getMultisiteKey()}) ? $this->{$this->getMultisiteKey()} : $this->getMultisiteValue();
 			$this->save();
 		}
 

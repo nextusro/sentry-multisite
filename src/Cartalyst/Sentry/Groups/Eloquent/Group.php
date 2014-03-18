@@ -271,6 +271,7 @@ class Group extends Multisite implements GroupInterface {
     public function save(array $options = array())
     {
         $this->validate();
+        $this->{$this->getMultisiteKey()} = isset($this->{$this->getMultisiteKey()}) ? $this->{$this->getMultisiteKey()} : $this->getMultisiteValue();
         return parent::save();
     }
 

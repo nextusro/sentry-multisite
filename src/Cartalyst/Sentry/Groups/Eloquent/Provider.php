@@ -113,7 +113,7 @@ class Provider extends MultisiteProvider implements ProviderInterface {
 	{
 		$group = $this->createModel();
 		$group->fill($attributes);
-		$group->{$this->getMultisiteKey()} = $this->getMultisiteValue();
+		$group->{$this->getMultisiteKey()} = isset($group->{$this->getMultisiteKey()}) ? $group->{$this->getMultisiteKey()} : $this->getMultisiteValue();
 		$group->save();
 		return $group;
 	}
