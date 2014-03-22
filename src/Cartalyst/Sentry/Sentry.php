@@ -146,7 +146,7 @@ class Sentry extends MultisiteProvider {
 			$user->attemptActivation($user->getActivationCode());
 		}
 
-		return $this->user = $user;
+		return $user;
 	}
 
 
