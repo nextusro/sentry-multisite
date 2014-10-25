@@ -1,5 +1,5 @@
 {
-	"name": "woazala/sentry-multisite",
+	"name": "nextusro/sentry-multisite",
 	"description": "PHP 5.3+ Fully-featured Authentication & Authorization System",
 	"keywords": ["auth", "security", "laravel", "multisite"],
 	"license": "BSD-3-Clause",
